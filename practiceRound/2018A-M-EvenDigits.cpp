@@ -2,7 +2,6 @@
 #include <cmath>
 #include <cstdlib>
 #include <map>
-#include <unordered_map>
 #include <string>
 #include <algorithm>
 using namespace std;
@@ -40,9 +39,9 @@ int main()
         {
             //generate map Digits
             int j = 0;
-            while (j <= c-1)
+            while (j <= c - 1)
             {
-                Digits[c-j] = n % 10;
+                Digits[c - j] = n % 10;
                 j++;
                 n = n / 10;
             }
@@ -66,31 +65,32 @@ int Plus(map<int, int> digits)
     {
         for (int e = 1; e <= c; e++)
         {
-            if (digits[e] % 2 != 0)     // odd
+            if (digits[e] % 2 != 0) // odd
             {
-                if (digits[e] == 9 && (digits[e-1] % 2) !=0)
+                if (digits[e] == 9 && (digits[e - 1] % 2) != 0)
                 {
                     digits[e] = 0;
                     digits[e - 1] += 1;
-                    while (e <= c-1)
+                    while (e <= c - 1)
                     {
-                        digits[e+1] = 0;
+                        digits[e + 1] = 0;
                         e++;
                     }
                     break;
                 }
-                else if (digits[e] == 9 && (digits[e-1] % 2) == 0)
+                else if (digits[e] == 9 && (digits[e - 1] % 2) == 0)
                 {
                     digits[e] = 0;
-                    digits[e-1] += 2;
-                    while (digits[e-2] % 2 == 0)
+                    digits[e - 1] += 2;
+                    while (digits[e - 2] % 2 == 0)
                     {
-                        digits[e-2] == 0;
-                        if ( digits.count(e-3) == 0 ) 
+                        digits[e - 2] == 0;
+                        if (digits.count(e - 3) == 0)
                         {
-                            digits[e-4] == 2;
-                        } else {
-
+                            digits[e - 4] == 2;
+                        }
+                        else
+                        {
                         }
                         e--;
                     }
@@ -100,9 +100,9 @@ int Plus(map<int, int> digits)
                 else
                 {
                     digits[e] += 1;
-                    while (e <= c-1)
+                    while (e <= c - 1)
                     {
-                        digits[e+1] = 0;
+                        digits[e + 1] = 0;
                         e++;
                     }
                     break;
@@ -133,9 +133,9 @@ int Minus(map<int, int> digits)
             if (digits[e] % 2 != 0)
             {
                 digits[e] = digits[e] - 1;
-                while (e <= c-1)
+                while (e <= c - 1)
                 {
-                    digits[e+1] = 8;
+                    digits[e + 1] = 8;
                     e++;
                 }
                 break;

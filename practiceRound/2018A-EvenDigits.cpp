@@ -1,112 +1,213 @@
-// attempt after 50 submissions and white board flowchart
-
 #include <iostream>
 #include <cmath>
+#include <cstdlib>
+#include <map>
+#include <unordered_map>
+#include <string>
+#include <algorithm>
 using namespace std;
 
-int plusY(int);
-int minusY(int);
-int degree(int);
-int first(int, int);
+map<int, int> Digits; // convert N to string
+
+int Plus(map<int, int>);
+int Minus(map<int, int>);
+int Count(int);
 
 int main()
 {
-    // Variables
-    int T;
-    int N;
-    int e, a, x;
-    int y;
-    int Plus, Minus;
+	int T;
+	int Number;
+	int i;
+	int y;
+	int COUNT; // count 1-17
 
-    cin >> T;
+	cin >> T;
 
-    for (int i = 1; i <= T; i++)
-    {
-        cin >> N;
-        e = degree(N);
+	for (i = 1; (i <= T) && (T <= 100); i++)	//1st order
+	{
+		cin >> Number;
+		unsigned int n = Number;
+		COUNT = Count(n);
+		int c = COUNT; // c = e + 1
 
-        if (e == 0)
-        {
-            y = 1;
-        }
-        else
-        {
-            Plus = abs(plusY(N));
-            Minus = abs(minusY(N));
-            y = min(Plus, Minus);
-        }
-        cout << "Case:#" << i << ": " << y << endl;
-    }
-    return 0;
+		if (c == 1) // if single digit
+		{
+			y = 1;
+			cout << "Case #" << i << ": " << y << flush << endl;
+			Digits.clear();
+		}
+		else
+		{
+			//generate map Digits
+			int j = 0;
+			while (j <= c - 1)	// 2nd order
+			{
+				Digits[c - j] = n % 10;
+				j++;
+				n = n / 10;
+			}
+			int yPlus = abs(Plus(Digits) - Number);
+			int yMinus = abs(Number - Minus(Digits));
+			int y = min(yPlus, yMinus);
+			cout << "Case #" << i << ": " << y << flush << endl;
+			Digits.clear();
+		}
+		
+	}
+	return 0;
 }
 
-int plusY(int n)
+int Plus(map<int, int> digits)
 {
-    int y;
-    int e = degree(n);
-    int b = n;
+	int c = digits.size();
+	int y;
+	string perfect;
 
-    while (e >= 1)
-    {
-        int e = degree(b);
-        int a = first(b, e);
-        if (a % 2 == 0)
-        {
-            b = b - a * pow(10, e);
-        }
-        else
-        {
-            y = (a + 1) * pow(10, e) - n;
-            return y;
-        }
-    }
+	if (c > 0)
+	{
+		for (int e = 1; e <= c; e++)	//3rd order
+		{
+			if (digits[e] % 2 != 0)     // odd
+			{
+				if (digits[e] == 9 && (digits[e - 1] % 2) != 0)
+				{
+					digits[e] = 0;
+					digits[e - 1] += 1;
+					while (e <= c - 1)		//4th order
+					{
+						digits[e + 1] = 0;
+						e++;
+					}
+					
+					break;
+				}
+				else if (digits[e] == 9 && (digits[e - 1] % 2) == 0)
+				{
+					digits[e] = 0;
+					digits[e - 1] += 2;
+					while (digits[e - 2] != 0)
+					{
+						digits[e - 2] == 0;
+						if (digits.count(e - 3) == 0)	// if biggest digit doesn't exist
+						{
+							digits[e - 3] == 2;
+							break;
+						}
+						else if (digits.at(e - 3) % 2 == 0)
+						{
+							digits[e - 3] = 0;
+							e--;
+						}
+						else
+						{
+							digits[e - 3] += 1;
+							break;
+						}
+					}
+
+					break;
+				}
+				else
+				{
+					digits[e] += 1;
+					while (e <= c - 1)
+					{
+						digits[e + 1] = 0;
+						e++;
+					}
+					break;
+				}
+			}
+			else
+			{
+				if (digits[e] == 8 && (digits[e - 1] % 2) != 0)
+				{
+					digits[e] = 0;
+					digits[e - 1] += 1;
+					while (e <= c - 1)
+					{
+						digits[e + 1] = 0;
+						e++;
+					}
+					break;
+				}
+				else if (digits[e] == 8 && (digits[e - 1] % 2) == 0)
+				{
+					digits[e] = 0;
+					digits[e - 1] += 2;
+					while (digits[e - 2] != 0)
+					{
+						digits[e - 2] == 0;
+						if (digits.count(e - 3) == 0)	// if biggest digit doesn't exist
+						{
+							digits[e - 3] == 2;
+							break;
+						}
+						else if (digits.at(e - 3) % 2 == 0)
+						{
+							digits[e - 3] = 0;
+							e--;
+						}
+						else
+						{
+							digits[e - 3] += 1;
+							break;
+						}
+					}
+					break;
+				}
+			}
+		}
+	}
+	for (auto& it : digits)
+	{
+		// Do stuff
+		perfect += to_string(it.second);
+	}
+	int even = stoi(perfect);
+	even = abs(even);
+	return even;
 }
 
-int minusY(int n)
+int Minus(map<int, int> digits)
 {
-    int x = 0;
-    int y;
-    int e = degree(n);
-    int a;
-    int b = n;
+	int c = digits.size();
+	int y;
+	string perfect;
 
-    while (e >= 1)
-    {
-        e = degree(b);
-        a = first(b, e);
-        if (a % 2 == 0)
-        {
-            x += a * pow(10, e);
-            b = b - a * pow(10, e);
-        }
-        else
-        {
-            x += (a - 1) * pow(10, e);
-            int j;
-            for (j = 0; e >= 1; e--)
-            {
-                j = 8 * pow(10, e - 1);
-                x += j;
-            }
-        }
-    }
-    y = n - x;
-    return y;
+	if (c >= 1)
+	{
+		for (int e = 1; e <= c; e++)
+		{
+			if (digits[e] % 2 != 0)
+			{
+				digits[e] = digits[e] - 1;
+				while (e <= c - 1)
+				{
+					digits[e + 1] = 8;
+					e++;
+				}
+				break;
+			}
+		}
+	}
+	for (auto& it : digits)
+	{
+		// Do stuff
+		perfect += to_string(it.second);
+	}
+	int even = stoi(perfect);
+	even = abs(even);
+	return even;
 }
 
-int degree(int n)
+int Count(int n)
 {
-    for (int e = 16; e >= 1; e--)
-    {
-        if (n / pow(10, e) >= 1)
-            return e;
-    }
-}
-
-int first(int n, int e)
-{
-    int a;
-    a = n / pow(10, e);
-    a = floor(a);
-    return a;
+	int count = 0;
+	while (n != 0)
+	{
+		n = n / 10;
+		++count;
+	}
+	return count;
 }

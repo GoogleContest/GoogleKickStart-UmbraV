@@ -1,4 +1,9 @@
 {
     "editor.fontSize": 18,
-    "editor.fontWeight": "bold"
+    "editor.fontWeight": "bold",
+    "editor.formatOnType": true,
+    "editor.defaultFormatter": "ms-vscode.cpptools",
+    "files.associations": {
+        "iosfwd": "cpp"
+    }
 }
