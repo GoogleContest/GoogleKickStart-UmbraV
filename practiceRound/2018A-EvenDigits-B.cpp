@@ -1,8 +1,8 @@
 // attempt after 50 submissions and white board flowchart
 
-# include <iostream>
-# include <cmath>
-# include <cstdlib>
+#include <iostream>
+#include <cmath>
+#include <cstdlib>
 using namespace std;
 
 int plusY(int);

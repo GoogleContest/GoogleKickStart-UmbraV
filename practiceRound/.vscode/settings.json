@@ -5,5 +5,8 @@
     "editor.defaultFormatter": "ms-vscode.cpptools",
     "files.associations": {
         "iosfwd": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "Enabled",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true
 }
