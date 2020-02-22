@@ -15,12 +15,7 @@ int Count(int);
 
 int main()
 {
-	int T;
-	int Number;
-	int i;
-	int y;
-	int COUNT; // count 1-17
-
+	int T, Number, i, y, COUNT;
 	cin >> T;
 
 	for (i = 1; (i <= T) && (T <= 100); i++)
@@ -31,7 +26,6 @@ int main()
 		int c = COUNT; // c = e + 1
 
 		if (c == 1) // if single digit
-			
 		{
 			y = 1;
 			cout << "Case #" << i << ": " << y << flush << endl;
@@ -53,7 +47,6 @@ int main()
 			cout << "Case #" << i << ": " << y << flush << endl;
 			Digits.clear();
 		}
-		
 	}
 	return 0;
 }
@@ -68,7 +61,7 @@ int Plus(map<int, int> digits)
 	{
 		for (int e = 1; e <= c; e++)
 		{
-			if (digits[e] % 2 != 0)     // odd
+			if (digits[e] % 2 != 0) // odd
 			{
 				if (digits[e] == 9 && (digits[e - 1] % 2) != 0)
 				{
@@ -88,7 +81,7 @@ int Plus(map<int, int> digits)
 					while (digits[e - 2] != 0)
 					{
 						digits[e - 2] == 0;
-						if (digits.count(e - 3) == 0)	// if biggest digit doesn't exist
+						if (digits.count(e - 3) == 0) // if biggest digit doesn't exist
 						{
 							digits[e - 3] == 2;
 							break;
@@ -138,7 +131,7 @@ int Plus(map<int, int> digits)
 					while (digits[e - 2] != 0)
 					{
 						digits[e - 2] == 0;
-						if (digits.count(e - 3) == 0)	// if biggest digit doesn't exist
+						if (digits.count(e - 3) == 0) // if biggest digit doesn't exist
 						{
 							digits[e - 3] == 2;
 							break;
@@ -159,7 +152,7 @@ int Plus(map<int, int> digits)
 			}
 		}
 	}
-	for (auto& it : digits)
+	for (auto &it : digits)
 	{
 		// Do stuff
 		perfect += to_string(it.second);
@@ -191,7 +184,7 @@ int Minus(map<int, int> digits)
 			}
 		}
 	}
-	for (auto& it : digits)
+	for (auto &it : digits)
 	{
 		// Do stuff
 		perfect += to_string(it.second);

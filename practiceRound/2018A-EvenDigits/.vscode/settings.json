@@ -1,0 +1,8 @@
+{
+    "editor.fontSize": 13,
+    "editor.defaultFormatter": "ms-vscode.cpptools",
+    "files.associations": {
+        "iostream": "cpp"
+    }
+
+}
