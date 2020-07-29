@@ -13,9 +13,8 @@ for t in range(1, T + 1):
 		result = b1
 	else:
 		b2 = (R-1)*(C-1)*2
-		a = 0
-		for i in range(2, R):
-			a += (R - i)*(C - i)* (i + 1)
+		M = R + C + 1
+		a = M - R * (R - 1)(2 * R + 3) * M // 6
 		result = b1 + b2 + a
 		result %= 10**9 + 7
 	print("Case #{}: {}".format(t, result))
