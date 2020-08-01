@@ -7,11 +7,12 @@ for t in range(1, T + 1):
         lis.append(input())  # list of forbidden strings
     lis.sort(key=len, reverse=True)
     forbidden = lis.copy()
-    for i in range(P):
-        for j in reversed(range(P)):
-            if lis[j] in lis[i]:
-                forbidden.remove(lis[j])
-    for y in forbidden:
+    for n, f in enumerate(forbidden):
+        for i in range(n):
+            if forbidden[i].startswith(f):
+                if forbidden[i] in lis:
+                    lis.remove(forbidden[i])
+    for y in lis:
         s -= 2**(N-len(y))
     print("Case #{}: {}".format(t, s))
 
