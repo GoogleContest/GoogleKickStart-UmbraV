@@ -1,4 +1,4 @@
-## GoogleKickStart-UmbraV [Link can be found here]
+## GoogleKickStart-UmbraV [Link can be found Below]
 [Practice/Learning] from Google Kick Start Contest
 ## My journey of playing with Google Kickstart (Completion Progress in Python)
 
